@@ -51,6 +51,14 @@ public class TSP implements Problem<List<Integer>> {
 
     public double cost(List<Integer> state){
       /*TODO*/
+        double totalDistance = 0.0;
+        for(int i=0, j=1; j<state.size(); i++, j++){
+            totalDistance +=
+                    MAP.distanceMatrix[state.get(i)];
+        }
+        totalDistance +=
+                Map.distanceMatrix[state.get(state.)];
+        return totalDistance;
     }
 
     public List<Integer> getInitState() {
