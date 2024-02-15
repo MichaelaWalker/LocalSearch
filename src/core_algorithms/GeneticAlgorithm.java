@@ -46,5 +46,6 @@ public class GeneticAlgorithm<G> {
         }//end of outer for loop
 
         Collections.sort(population);
+        return population.get(0);
     }
 }
