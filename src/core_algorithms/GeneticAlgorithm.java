@@ -53,7 +53,14 @@ public abstract class GeneticAlgorithm<G> {
 
     public abstract Individual<G> mutate (Individual<G> i);
 
+    public abstract double calcFitnessScore(List<G> chromosome);
+
     public Individual<G> selectAParent (List<Individual<G>> population){
+        //TODO
+    }
+
+    //optional - Select a parent that's not p
+    public Individual<G> selectAParent(List<Individual<G>> population, Individual<G> p){
         //TODO
     }
 }
