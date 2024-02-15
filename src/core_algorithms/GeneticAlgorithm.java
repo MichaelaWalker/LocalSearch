@@ -56,4 +56,5 @@ public abstract class GeneticAlgorithm<G> {
     public Individual<G> selectAParent (List<Individual<G>> population){
         //TODO
     }
+
 }
