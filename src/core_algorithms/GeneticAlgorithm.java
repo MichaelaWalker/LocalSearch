@@ -8,7 +8,7 @@ import java.util.Random;
 /**
  * implement elements that are independent of any specific problem
  * */
-public class GeneticAlgorithm<G> {
+public abstract class GeneticAlgorithm<G> {
     private final int MAX_GEN;
     private final double MUTATION_RATE;
     private final double ELITISM;
@@ -47,5 +47,13 @@ public class GeneticAlgorithm<G> {
 
         Collections.sort(population);
         return population.get(0);
+    }
+
+    public abstract Individual<G> reproduce (Individual<G> p1, Individual<G> p2);
+
+    public abstract Individual<G> mutate (Individual<G> i);
+
+    public Individual<G> selectAParent (List<Individual<G>> population){
+        //TODO
     }
 }
