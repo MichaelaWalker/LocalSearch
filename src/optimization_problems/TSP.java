@@ -46,7 +46,15 @@ public class TSP implements Problem<List<Integer>> {
 
     //generate a new tour by randomly swap two cities in the given tour
     public List<Integer> generateNewState (List<Integer> state){
-        /* TODO */
+        Random r = new Random();
+        int city1 = r.nextInt(state.size());
+        int city2;
+        do {
+            city2 = r.nextInt(state.size());
+        } while(city2 == city1);
+        List<Integer> newState = new ArrayList<>(state);
+        Collections.swap(newState, city1, city2);
+        return newState;
     }
 
     public double cost(List<Integer> state){
@@ -54,10 +62,10 @@ public class TSP implements Problem<List<Integer>> {
         double totalDistance = 0.0;
         for(int i=0, j=1; j<state.size(); i++, j++){
             totalDistance +=
-                    MAP.distanceMatrix[state.get(i)];
+                    MAP.distanceMatrix[state.get(i)][state.get(j)];
         }
         totalDistance +=
-                Map.distanceMatrix[state.get(state.)];
+                MAP.distanceMatrix[state.get(state.size()-1)][state.get(0)];
         return totalDistance;
     }
 
