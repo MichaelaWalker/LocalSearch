@@ -2,7 +2,7 @@ package core_algorithms;
 
 import java.util.List;
 
-public abstract class Individual<G> implements Comparable<Individual<G>>{
+public class Individual<G> implements Comparable<Individual<G>>{
 
     private List<G> chromosome;
 
@@ -11,11 +11,8 @@ public abstract class Individual<G> implements Comparable<Individual<G>>{
 
     public Individual(List<G> chromosome, double fitnessScore){
         this.chromosome = chromosome;
-        this.fitnessScore =
-                calcFitnessScore(this.chromosome);
+        this.fitnessScore = fitnessScore;
     }
-
-    public abstract double calcFitnessScore(List<G> chromosome);
 
     public List<G> getChromosome() {
         return chromosome;
