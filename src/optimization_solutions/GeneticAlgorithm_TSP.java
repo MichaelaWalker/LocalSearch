@@ -7,6 +7,7 @@ import optimization_problems.TSP;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class GeneticAlgorithm_TSP extends GeneticAlgorithm<Integer> {
     private final TSP problem;
@@ -22,11 +23,46 @@ public class GeneticAlgorithm_TSP extends GeneticAlgorithm<Integer> {
 
     public Individual<Integer> reproduce(
             Individual<Integer> p1, Individual<Integer> p2) {
-        //TODO
+        List<Integer> parent1Chromosome = p1.getChromosome();
+        List<Integer> parent2Chromosome = p2.getChromosome();
+
+        int size = parent1Chromosome.size();
+        int startPos = new Random().nextInt(size);
+        int endPos = new Random().nextInt(size);
+
+        if (startPos > endPos) {
+            int temp = startPos;
+            startPos = endPos;
+            endPos = temp;
+        }
+
+        List<Integer> childChromosome = new ArrayList<>();
+        for (int i = startPos; i < endPos; i++) {
+            childChromosome.add(parent1Chromosome.get(i));
+        }
+
+        for (int i = 0; i < size; i++) {
+            int gene = parent2Chromosome.get(i);
+            if (!childChromosome.contains(gene)) {
+                childChromosome.add(gene);
+            }
+        }
+
+        double fitnessScore = calcFitnessScore(childChromosome);
+        return new Individual<>(childChromosome, fitnessScore);
     }
 
-    public Individual<Integer> mutate(Individual i){
-        //TODO
+    public Individual<Integer> mutate(Individual<Integer> i){
+        List<Integer> chromosome = new ArrayList<>(i.getChromosome());
+        int size = chromosome.size();
+
+        int pos1 = new Random().nextInt(size);
+        int pos2 = new Random().nextInt(size);
+
+        Collections.swap(chromosome, pos1, pos2);
+
+        double fitnessScore = calcFitnessScore(chromosome);
+        return new Individual<>(chromosome, fitnessScore);
     }
 
     public List<Individual<Integer>> generateInitPopulation(

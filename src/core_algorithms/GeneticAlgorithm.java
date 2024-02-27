@@ -56,11 +56,26 @@ public abstract class GeneticAlgorithm<G> {
     public abstract double calcFitnessScore(List<G> chromosome);
 
     public Individual<G> selectAParent (List<Individual<G>> population){
-        //TODO
+        double totalFitness = 0.0;
+        for (Individual<G> individual : population) {
+            totalFitness += individual.getFitnessScore();
+        }
+        double rand = new Random().nextDouble() * totalFitness;
+
+        double cumulativeProbability = 0.0;
+        for (Individual<G> individual : population) {
+            cumulativeProbability += individual.getFitnessScore();
+            if (cumulativeProbability >= rand) {
+                return individual;
+            }
+        }
+
+        return population.get(population.size() - 1);
     }
 
     //optional - Select a parent that's not p
     public Individual<G> selectAParent(List<Individual<G>> population, Individual<G> p){
         //TODO
+        return null;
     }
 }
