@@ -3,7 +3,6 @@ package optimization_solutions;
 import core_algorithms.GeneticAlgorithm;
 import core_algorithms.Individual;
 import optimization_problems.TSP;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,8 +20,7 @@ public class GeneticAlgorithm_TSP extends GeneticAlgorithm<Integer> {
         return 1/problem.cost(chromosome);
     }
 
-    public Individual<Integer> reproduce(
-            Individual<Integer> p1, Individual<Integer> p2) {
+    public Individual<Integer> reproduce(Individual<Integer> p1, Individual<Integer> p2) {
         List<Integer> parent1Chromosome = p1.getChromosome();
         List<Integer> parent2Chromosome = p2.getChromosome();
 
