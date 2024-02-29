@@ -95,7 +95,7 @@ public class GeneticAlgorithm_TSP extends GeneticAlgorithm<Integer> {
                 MAX_GEN, MUTATION_RATE, ELITISM, problem);
 
         Individual<Integer> best = agent.evolve(agent.generateInitPopulation(
-                NUM_CITIES, POPULATION_SIZE));
+                POPULATION_SIZE, NUM_CITIES));
 
 
         System.out.println(best);
