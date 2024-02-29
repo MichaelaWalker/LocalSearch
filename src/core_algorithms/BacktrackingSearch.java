@@ -78,7 +78,6 @@ public abstract class BacktrackingSearch <X, V> {
      * @return
      */
     public boolean initAC3(){
-        //TODO: create a queue that contains all the arcs; call AC3() with this queue.
         Queue<Arc<X>> arcs = new LinkedList<>();
         for(X v : allVariables.keySet()){
             for(X n : problem.getNeighborsOf(v)){
