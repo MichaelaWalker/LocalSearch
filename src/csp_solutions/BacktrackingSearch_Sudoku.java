@@ -4,6 +4,9 @@ import core_algorithms.BacktrackingSearch;
 import csp_problems.*;
 import csp_problems.CSPProblem.Variable;
 
+import java.util.List;
+import java.util.Map;
+
 
 public class BacktrackingSearch_Sudoku extends BacktrackingSearch<String,Integer>{
 
@@ -19,7 +22,25 @@ public class BacktrackingSearch_Sudoku extends BacktrackingSearch<String,Integer
      * @return true if the tail has been revised (lost some values), false otherwise
      */
     public boolean revise(String head, String tail) {
-        //TODO
+        boolean revised = false;
+        List<Integer> headDomain = getAllVariables().get(head).domain();
+        List<Integer> tailDomain = getAllVariables().get(tail).domain();
+
+        for (int i = 0; i < tailDomain.size(); i++) {
+            int value = tailDomain.get(i);
+            Boolean satisfied = false;
+            for (int j = 0; j < headDomain.size(); j++) {
+                if (value != headDomain.get(j)) {
+                    satisfied = true;
+                    break;
+                }
+            }
+            if (!satisfied) {
+                tailDomain.remove(i);
+                revised = true;
+            }
+        }
+        return revised;
     }
 
     /**
@@ -28,7 +49,20 @@ public class BacktrackingSearch_Sudoku extends BacktrackingSearch<String,Integer
      *         null if all variables have been assigned
      */
     public String selectUnassigned(){
-        //TODO
+        String selectedVariable = null;
+        int minDomainSize = Integer.MAX_VALUE;
+        for (Map.Entry<String, Variable<String, Integer>> entry : getAllVariables().entrySet()) {
+            String variable = entry.getKey();
+            Variable<String, Integer> var = entry.getValue();
+            if (!assigned(variable)) {
+                int domainSize = var.domain().size();
+                if (domainSize < minDomainSize) {
+                    minDomainSize = domainSize;
+                    selectedVariable = variable;
+                }
+            }
+        }
+        return selectedVariable;
     }
 
     /**
